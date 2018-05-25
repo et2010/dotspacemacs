@@ -484,6 +484,14 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; https://emacs-china.org/t/topic/5728/7?u=et2010
+  (semantic-mode 1)
+  (semantic-default-elisp-setup)
+  ;; enable /semantic/ with minimal features for /stickyfunc/ and /*-semantic-or-imenu/
+  ;; stop semantic parsing (huge,slow) elisp sys libraries
+  (setq-mode-local emacs-lisp-mode
+                   semanticdb-find-default-throttle
+                   (default-value 'semanticdb-find-default-throttle))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
