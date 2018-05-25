@@ -47,15 +47,15 @@ This function should only modify configuration layer settings."
      csv
      emacs-lisp
      git
-     ;; markdown
-     ;; org
+     markdown
+     org
      pdf-tools
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; (spell-checking :variables spell-checking-enable-by-default nil)
-     ;; syntax-checking
-     ;; (treemacs :variables treemacs-use-filewatch-mode t treemacs-use-follow-mode t)
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     (spell-checking :variables spell-checking-enable-by-default nil)
+     syntax-checking
+     (treemacs :variables treemacs-use-filewatch-mode t treemacs-use-follow-mode t)
      (version-control :variables git-gutter+-disable-modes '(image-mode org-mode))
      )
 
@@ -489,7 +489,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (unfill org-ref key-chord helm-bibtex htmlize parsebib mwim gmail-message-mode ham-mode markdown-mode html-to-markdown flymd edit-server csv-mode biblio biblio-core yasnippet-snippets ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org symon string-inflection spaceline-all-the-icons smex smeargle restart-emacs request rainbow-delimiters popwin persp-mode pdf-tools pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file neotree nameless move-text magit-gitflow macrostep lorem-ipsum linum-relative link-hint ivy-xref ivy-purpose ivy-hydra indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ fuzzy font-lock+ flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump diminish diff-hl define-word counsel-projectile company-statistics column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ac-ispell))))
+    (orgit yasnippet-snippets xterm-color ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package unfill treemacs-projectile treemacs-evil toc-org symon string-inflection spaceline-all-the-icons smex smeargle shell-pop restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox overseer org-ref org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file nameless mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint ivy-xref ivy-purpose ivy-hydra indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio gnuplot gmail-message-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy font-lock+ flyspell-correct-ivy flymd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav editorconfig edit-server dumb-jump diminish diff-hl define-word csv-mode counsel-projectile company-statistics column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent ace-link ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
