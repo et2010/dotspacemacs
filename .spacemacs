@@ -502,6 +502,11 @@ before packages are loaded."
   (setq-mode-local emacs-lisp-mode
                    semanticdb-find-default-throttle
                    (default-value 'semanticdb-find-default-throttle))
+  ;; 设置字体
+  (spacemacs|do-after-display-system-init
+   ;; (han/set-fixed-pitch-inheritance)
+   ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
+   (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
