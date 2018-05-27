@@ -518,6 +518,12 @@ before packages are loaded."
 
   ;; see http://emacs.stackexchange.com/a/3696
   (setq find-file-visit-truename t)
+
+  ;; https://github.com/syl20bnr/spacemacs/issues/10366
+  (spacemacs//python-setup-anaconda-company)
+
+  ;; default python virtualenv
+  (pyvenv-workon "scienv")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
