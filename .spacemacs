@@ -481,6 +481,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq winum-scope 'frame-local)
   ;; Enable all-the-icons in dired mode
   (add-hook 'dired-mode-hook (lambda () (all-the-icons-dired-mode) (spacemacs|diminish all-the-icons-dired-mode)))
+  ;; Enable aggressive indent for emacs-lisp mode
+  (add-hook 'emacs-lisp-mode-hook #'spacemacs/toggle-aggressive-indent)
   )
 
 (defun dotspacemacs/user-load ()
