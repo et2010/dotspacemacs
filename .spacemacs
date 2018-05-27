@@ -506,7 +506,6 @@ before packages are loaded."
                    (default-value 'semanticdb-find-default-throttle))
   ;; 设置字体
   (spacemacs|do-after-display-system-init
-   ;; (han/set-fixed-pitch-inheritance)
    ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
    (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
   ;; https://github.com/emacs-evil/evil/issues/912
