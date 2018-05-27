@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
      et-nl
      et-org
      et-python
-     et2010
+     (et2010 :variables et2010-prettify-org-src-block t)
      )
 
    ;; List of additional packages that will be installed without being
