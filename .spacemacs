@@ -507,6 +507,10 @@ before packages are loaded."
   (setq-mode-local emacs-lisp-mode
                    semanticdb-find-default-throttle
                    (default-value 'semanticdb-find-default-throttle))
+
+  ;; 当使用 doom 主题时启用
+  (doom-themes-org-config)
+
   ;; 设置字体
   (spacemacs|do-after-display-system-init
    ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
