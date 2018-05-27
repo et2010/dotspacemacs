@@ -515,9 +515,6 @@ before packages are loaded."
   (spacemacs|do-after-display-system-init
    ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
    (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
-  ;; https://github.com/emacs-evil/evil/issues/912
-  (define-key evil-motion-state-map [remap evil-next-line] 'evil-next-visual-line)
-  (define-key evil-motion-state-map [remap evil-previous-line] 'evil-previous-visual-line)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
