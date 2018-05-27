@@ -480,7 +480,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; https://github.com/syl20bnr/spacemacs/issues/8740
   (setq winum-scope 'frame-local)
   ;; Enable all-the-icons in dired mode
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+  (add-hook 'dired-mode-hook (lambda () (all-the-icons-dired-mode) (spacemacs|diminish all-the-icons-dired-mode)))
   )
 
 (defun dotspacemacs/user-load ()
