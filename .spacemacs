@@ -58,7 +58,7 @@ This function should only modify configuration layer settings."
      (python :variables python-enable-yapf-format-on-save t)
      ranger
      semantic
-     (shell :variables shell-default-height 30 shell-default-position 'bottom)
+     (shell :variables shell-default-shell 'eshell shell-default-height 30 shell-default-position 'bottom)
      shell-scripts
      (spell-checking :variables spell-checking-enable-by-default nil)
      syntax-checking
