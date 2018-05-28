@@ -528,8 +528,9 @@ before packages are loaded."
    ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
    (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
 
-  ;; see http://emacs.stackexchange.com/a/3696
-  (setq find-file-visit-truename t)
+  ;; see http://emacs.stackexchange.com/a/3696 and https://github.com/magit/magit/issues/703
+  (setq find-file-visit-truename t
+        vc-follow-symlinks t)
 
   (define-key read-expression-map (kbd "C-r") 'counsel-minibuffer-history)
 
