@@ -480,10 +480,6 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; https://github.com/syl20bnr/spacemacs/issues/8740
   (setq winum-scope 'frame-local)
-  ;; Enable all-the-icons in dired mode
-  (add-hook 'dired-mode-hook (lambda () (all-the-icons-dired-mode) (spacemacs|diminish all-the-icons-dired-mode)))
-  ;; Enable aggressive indent for emacs-lisp mode
-  (add-hook 'emacs-lisp-mode-hook #'spacemacs/toggle-aggressive-indent)
   (setq spaceline-show-fcitx-status t)
   )
 
@@ -509,6 +505,12 @@ before packages are loaded."
                    semanticdb-find-default-throttle
                    (default-value 'semanticdb-find-default-throttle))
 
+  ;; Enable all-the-icons in dired mode
+  (add-hook 'dired-mode-hook #'all-the-icons-dired-mode )
+  (spacemacs|diminish all-the-icons-dired-mode)
+
+  ;; Enable aggressive indent for emacs-lisp mode
+  (add-hook 'emacs-lisp-mode-hook #'spacemacs/toggle-aggressive-indent-on)
   ;; 当使用 doom 主题时启用
   (doom-themes-org-config)
 
