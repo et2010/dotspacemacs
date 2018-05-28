@@ -64,7 +64,7 @@ This function should only modify configuration layer settings."
      syntax-checking
      templates
      (treemacs :variables treemacs-use-filewatch-mode t treemacs-use-follow-mode t)
-     (version-control :variables git-gutter+-disable-modes '(image-mode org-mode))
+     (version-control :variables git-gutter+-disabled-modes '(image-mode org-mode))
      ;; from here are private layers:
      et-goodies
      et-nl
