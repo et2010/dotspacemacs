@@ -516,6 +516,10 @@ before packages are loaded."
 
   ;; Enable aggressive indent for emacs-lisp mode
   (add-hook 'emacs-lisp-mode-hook #'spacemacs/toggle-aggressive-indent-on)
+
+  ;; https://github.com/politza/pdf-tools/issues/247
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+
   ;; 当使用 doom 主题时启用
   (doom-themes-org-config)
 
