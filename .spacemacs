@@ -484,6 +484,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (add-hook 'dired-mode-hook (lambda () (all-the-icons-dired-mode) (spacemacs|diminish all-the-icons-dired-mode)))
   ;; Enable aggressive indent for emacs-lisp mode
   (add-hook 'emacs-lisp-mode-hook #'spacemacs/toggle-aggressive-indent)
+  (setq spaceline-show-fcitx-status t)
   )
 
 (defun dotspacemacs/user-load ()
