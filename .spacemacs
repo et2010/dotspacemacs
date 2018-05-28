@@ -524,6 +524,8 @@ before packages are loaded."
   ;; see http://emacs.stackexchange.com/a/3696
   (setq find-file-visit-truename t)
 
+  (define-key read-expression-map (kbd "C-r") 'counsel-minibuffer-history)
+
   ;; https://github.com/syl20bnr/spacemacs/issues/10366
   (spacemacs//python-setup-anaconda-company)
 
