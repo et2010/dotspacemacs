@@ -52,7 +52,7 @@ This function should only modify configuration layer settings."
      imenu-list
      latex
      markdown
-     nlinum
+     ;; nlinum
      org
      pdf-tools
      (python :variables python-enable-yapf-format-on-save t)
@@ -401,9 +401,12 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers '(:relative nil
-                               :disabled-for-modes dired-mode doc-view-mode markdown-mode org-mode pdf-view-mode text-mode
-                               :size-limit-kb 1000)
+   dotspacemacs-line-numbers '(
+                               :relative nil
+                               :enabled-for-modes prog-mode
+                               :disabled-for-modes spacemacs-buffer-mode help-mode dired-mode doc-view-mode markdown-mode org-mode pdf-view-mode text-mode
+                               ;; :size-limit-kb 1000
+                               )
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
