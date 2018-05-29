@@ -533,7 +533,8 @@ before packages are loaded."
   (setq find-file-visit-truename t
         vc-follow-symlinks t)
 
-  (define-key read-expression-map (kbd "C-r") 'counsel-minibuffer-history)
+  ;; Uncomment this line when using Emacs 25.3, see https://github.com/syl20bnr/spacemacs/pull/10701
+  ;; (define-key read-expression-map (kbd "C-r") 'counsel-minibuffer-history)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/10366
   (spacemacs//python-setup-anaconda-company)
