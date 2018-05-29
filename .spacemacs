@@ -82,8 +82,6 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(all-the-icons-dired
                                       (org-download :location (recipe :fetcher github :repo "et2010/org-download" :upgrade nil))
-                                      ;; (org-plus-contrib :location (recipe :fetcher local :files ("lisp/*.el" "contrib/lisp/*.el" "doc/dir" "doc/*.texi") :upgrade nil))
-                                      ;; (pdf-tools :location (recipe :fetcher github :repo "et2010/pdf-tools"  :files ("lisp/*.el" "README") :upgrade nil))
                                       (spaceline :location (recipe :fetcher github :repo "et2010/spaceline" :upgrade nil))
                                       )
 
