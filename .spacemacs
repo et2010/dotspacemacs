@@ -537,7 +537,28 @@ before packages are loaded."
   ;; (define-key read-expression-map (kbd "C-r") 'counsel-minibuffer-history)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/10366
-  (spacemacs//python-setup-anaconda-company)
+  (defun spacemacs//python-setup-anaconda-company ()
+    "Setup anaconda auto-completion."
+    (spacemacs|add-company-backends
+      :backends (company-anaconda company-files company-yasnippet)
+      :modes python-mode
+      :append-hooks nil
+      :call-hooks t)
+    (company-mode))
+
+  (defun spacemacs//python-setup-shell (&rest args)
+    ;; `spacemacs/pyenv-executable-find' always return nil even ipython was installed
+    (if t ;(spacemacs/pyenv-executable-find "ipython")
+        (progn (setq python-shell-interpreter "ipython")
+               (if (version< (replace-regexp-in-string "[\r\n|\n]$" "" (shell-command-to-string "ipython --version")) "5")
+                   ;; following line is different from original spacemacs
+                   (setq python-shell-interpreter-args "-i --pylab=qt --gui=qt")
+                 (setq python-shell-interpreter-args "--simple-prompt -i")))
+      (progn
+        (setq python-shell-interpreter-args "-i")
+        (setq python-shell-interpreter "python"))))
+  (spacemacs//python-setup-shell)
+
 
   ;; default python virtualenv
   (pyvenv-workon "scienv")
