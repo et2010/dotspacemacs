@@ -60,7 +60,7 @@ This function should only modify configuration layer settings."
      semantic
      (shell :variables shell-default-shell 'eshell shell-default-height 30 shell-default-position 'bottom)
      shell-scripts
-     (spell-checking :variables spell-checking-enable-by-default nil)
+     (spell-checking :variables spell-checking-enable-by-default nil ispell-program-name "aspell")
      syntax-checking
      templates
      (treemacs :variables treemacs-use-filewatch-mode t treemacs-use-follow-mode t)
