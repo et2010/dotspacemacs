@@ -223,8 +223,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 12
+   dotspacemacs-default-font '("Sarasa Term SC"
+                               :size 13
                                :weight normal
                                :width normal)
 
@@ -496,10 +496,12 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; 设置字体
-  (spacemacs|do-after-display-system-init
-   ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
-   (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
+
+  ;; ;; 设置字体
+  ;; (spacemacs|do-after-display-system-init
+  ;;  ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
+  ;;  (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
