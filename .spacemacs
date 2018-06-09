@@ -472,6 +472,24 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; 将希腊字母宽度设为一个字符
+  ;; https://emacs-china.org/t/topic/6059/18
+  (defun blaenk/set-char-widths (alist)
+    (while (char-table-parent char-width-table)
+      (setq char-width-table (char-table-parent char-width-table)))
+    (dolist (pair alist)
+      (let ((width (car pair))
+            (chars (cdr pair))
+            (table (make-char-table nil)))
+        (dolist (char chars)
+          (set-char-table-range table char width))
+        (optimize-char-table table)
+        (set-char-table-parent table char-width-table)
+        (setq char-width-table table))))
+
+  (blaenk/set-char-widths
+   `((1 . (,(string-to-char "α")))))
+
   ;; https://emacs-china.org/t/topic/5728/7?u=et2010
   (semantic-mode 1)
   (semantic-default-elisp-setup)
