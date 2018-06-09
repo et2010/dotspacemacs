@@ -228,8 +228,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 12
+   dotspacemacs-default-font '("Sarasa Term SC"
+                               :size 14
                                :weight normal
                                :width normal)
 
@@ -513,9 +513,9 @@ before packages are loaded."
   ;; (doom-themes-org-config)
 
   ;; 设置字体
-  (spacemacs|do-after-display-system-init
-   ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
-   (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
+  ;; (spacemacs|do-after-display-system-init
+  ;;  ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
+  ;;  (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
 
   ;; see http://emacs.stackexchange.com/a/3696 and https://github.com/magit/magit/issues/703
   (setq find-file-visit-truename t
