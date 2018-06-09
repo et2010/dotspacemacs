@@ -209,8 +209,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-nord-light
-                         spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
+                         doom-nord-light
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -510,7 +510,7 @@ before packages are loaded."
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
 
   ;; 当使用 doom 主题时启用
-  (doom-themes-org-config)
+  ;; (doom-themes-org-config)
 
   ;; 设置字体
   (spacemacs|do-after-display-system-init
