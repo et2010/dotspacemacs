@@ -487,6 +487,20 @@ in the dump."
 
   (pyvenv-workon "scienv")
 
+  ;; 将希腊字母宽度设为一个字符
+  (defun blaenk/set-char-widths (alist)
+    (while (char-table-parent char-width-table)
+      (setq char-width-table (char-table-parent char-width-table)))
+    (dolist (pair alist)
+      (let ((width (car pair))
+            (chars (cdr pair))
+            (table (make-char-table nil)))
+        (dolist (char chars)
+          (set-char-table-range table char width))
+        (optimize-char-table table)
+        (set-char-table-parent table char-width-table)
+        (setq char-width-table table))))
+
   (require 'org)
   )
 
@@ -501,6 +515,10 @@ before packages are loaded."
   ;; (spacemacs|do-after-display-system-init
   ;;  ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
   ;;  (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
+
+  ;; 将希腊字母宽度设为一个字符
+  (blaenk/set-char-widths
+   `((1 . (,(string-to-char "α")))))
 
   (server-start)
   )
