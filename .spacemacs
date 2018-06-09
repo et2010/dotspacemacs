@@ -172,7 +172,8 @@ It should only modify the values of Spacemacs settings."
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
    dotspacemacs-editing-style '(hybrid :variables
-                                       hybrid-mode-enable-hjkl-bindings t
+                                       hybrid-style-enable-hjkl-bindings t
+                                       hybrid-style-visual-feedback t
                                        ;; hybrid-mode-use-evil-search-module t
                                        )
 
