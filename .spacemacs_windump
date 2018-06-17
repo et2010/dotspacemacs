@@ -385,13 +385,13 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; (default nil)
    dotspacemacs-line-numbers '(:relative nil
-                               :disabled-for-modes dired-mode
-                                                   doc-view-mode
-                                                   markdown-mode
-                                                   org-mode
-                                                   pdf-view-mode
-                                                   text-mode
-                               :size-limit-kb 1000)
+                                         :disabled-for-modes dired-mode
+                                         doc-view-mode
+                                         markdown-mode
+                                         org-mode
+                                         pdf-view-mode
+                                         text-mode
+                                         :size-limit-kb 1000)
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -459,7 +459,7 @@ It should only modify the values of Spacemacs settings."
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'trailing
+   dotspacemacs-whitespace-cleanup 'changed
 
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
@@ -512,9 +512,11 @@ in the dump."
       :call-hooks t)
     (company-mode))
 
-  (pyvenv-workon "scienv")
+  (pyvenv-workon "venv27")
 
   (require 'org)
+
+  (tooltip-mode 1)
   )
 
 (defun dotspacemacs/user-config ()
