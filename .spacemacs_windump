@@ -464,6 +464,9 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq winum-scope 'frame-local)
+
+  ;; https://github.com/proofit404/anaconda-mode/issues/265
+  (setq url-proxy-services '(("no_proxy" . "\\(localhost\\|127\\.0\\.0\\.1\\)")))
   )
 
 (defun dotspacemacs/user-load ()
