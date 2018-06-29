@@ -493,11 +493,25 @@ in the dump."
       :call-hooks t)
     (company-mode))
 
-  (pyvenv-workon "venv27")
+  (defun spacemacs|load-modes (modes)
+    (dolist (mode modes)
+      (with-temp-buffer
+        (funcall
+         (intern (concat (symbol-name mode) "-mode"))))))
 
-  (require 'org)
+  (spacemacs|load-modes '(org
+                          emacs-lisp
+                          python
+                          markdown
+                          dired
+                          ))
+
+  (pyvenv-workon "sci")
 
   (tooltip-mode 1)
+
+  (stardict-mode 1)
+
   )
 
 (defun dotspacemacs/user-config ()
