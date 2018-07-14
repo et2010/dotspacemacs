@@ -81,7 +81,9 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(all-the-icons-dired
-                                      (org-download :location (recipe :fetcher github :repo "et2010/org-download" :upgrade nil))
+                                      (gnuplot :location (recipe :fetcher github :repo "et2010/gnuplot-mode" :files ("gnuplot.el" "gnuplot-gui.el" "gnuplot-context.el")))
+                                      (ob-ipython :location (recipe :fetcher github :repo "et2010/ob-ipython" :files (:defaults "*.py")))
+                                      (org-download :location (recipe :fetcher github :repo "et2010/org-download"))
                                       (spaceline :location (recipe :fetcher github :repo "et2010/spaceline" :upgrade nil))
                                       )
 
@@ -117,7 +119,7 @@ It should only modify the values of Spacemacs settings."
    ;; File path pointing to emacs 27.1 executable compiled with support
    ;; for the portable dumper (this is currently the branch pdumper).
    ;; (default "emacs-27.0.50")
-   dotspacemacs-emacs-pdumper-executable-file "emacs-27.0.50"
+   dotspacemacs-emacs-pdumper-executable-file "/home/jw/git/build-emacs/src/emacs-27.0.50.1"
 
    ;; Name of the Spacemacs dump file. This is the file will be created by the
    ;; portable dumper in the cache directory under dumps sub-directory.
@@ -471,6 +473,10 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; https://github.com/syl20bnr/spacemacs/issues/8740
   (setq winum-scope 'frame-local)
+
+  ;; https://github.com/proofit404/anaconda-mode/issues/265
+  (setq url-proxy-services '(("no_proxy" . "\\(localhost\\|127\\.0\\.0\\.1\\)")))
+
   (setq spaceline-show-fcitx-status t)
   )
 
@@ -566,6 +572,8 @@ before packages are loaded."
   (blaenk/set-char-widths
    `((1 . (,(string-to-char "α")))))
 
+  (server-start)
+
   ;; default python virtualenv
   (pyvenv-workon "scienv")
   )
@@ -583,8 +591,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (powerthesaurus zotxt youdao-dictionary yatemplate yasnippet-snippets yapfify xterm-color ws-butler winum which-key wgrep volatile-highlights visual-fill-column vi-tilde-fringe uuidgen use-package unfill treemacs-projectile treemacs-evil toc-org tldr synosaurus symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons smex smeargle shell-pop scimax-utils scimax-org restart-emacs ranger rainbow-delimiters pyvenv pytest pyim pyenv-mode py-isort popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox pangu-spacing ox-pandoc-md overseer org-trans-helper org-sticky-header org-ref org-protocol-capture-html org-projectile org-present org-pomodoro org-pdfview org-noter org-mime org-edit-latex org-cliplink org-bullets org-brain org-autolist orca open-junk-file nameless mwim multi-term move-text mmm-mode markdown-toc magit-svn magit-org-todos magit-gitflow macrostep lpy lorem-ipsum live-py-mode link-hint ivy-yasnippet ivy-xref ivy-purpose ivy-hydra insert-shebang indent-guide importmagic ibuffer-projectile hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-lines helm-org-rifle helm-make google-translate golden-ratio gnuplot gmail-message-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy function-args font-lock+ flyspell-correct-ivy flymd flycheck-pos-tip flycheck-bashate flx-ido fish-mode find-by-pinyin-dired fill-column-indicator fcitx fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-snipe evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-find-char-pinyin evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav editorconfig edit-server dumb-jump doom-themes diminish diff-hl define-word cython-mode csv-mode counsel-projectile company-statistics company-shell company-reftex company-auctex company-anaconda column-enforce-mode clean-aindent-mode centered-cursor-mode cdlatex browse-at-remote avy-zap autoimports auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk all-the-icons-dired aggressive-indent aggressive-fill-paragraph ace-pinyin ace-link academic-phrases ac-ispell))))
+   '(org-noter org-download ob-ipython gnuplot spaceline zotxt youdao-dictionary yatemplate yasnippet-snippets yapfify xterm-color ws-butler winum which-key wgrep volatile-highlights visual-fill-column vi-tilde-fringe uuidgen use-package unfill treemacs-projectile treemacs-evil toc-org tldr synosaurus symon string-inflection stickyfunc-enhance stardict srefactor spaceline-all-the-icons smex smeargle shell-pop scimax-utils scimax-org restart-emacs ranger rainbow-delimiters pyvenv pytest pyim pyenv-mode py-isort powerthesaurus popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox pangu-spacing ox-pandoc-md overseer orgit org-trans-helper org-sticky-header org-ref org-protocol-capture-html org-projectile org-present org-pomodoro org-plot-helper org-pdfview org-mime org-edit-latex org-cliplink org-bullets org-brain org-autolist ore orca open-junk-file nameless mwim mw-thesaurus multi-term move-text mmm-mode markdown-toc magit-svn magit-org-todos magit-gitflow macrostep lpy lorem-ipsum live-py-mode link-hint ivy-yasnippet ivy-xref ivy-purpose ivy-hydra insert-shebang indent-guide importmagic ibuffer-projectile hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-lines helm-org-rifle helm-make google-translate golden-ratio gmail-message-mode gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy function-args font-lock+ flyspell-correct-ivy flymd flycheck-pos-tip flycheck-bashate flx-ido fish-mode find-by-pinyin-dired fill-column-indicator fcitx fancy-battery eyebrowse expand-region examples evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-snipe evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-find-char-pinyin evil-exchange evil-escape evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav editorconfig edit-server dumb-jump dotenv-mode doom-themes diminish diff-hl define-word dash-functional cython-mode csv-mode counsel-projectile company-statistics company-shell company-reftex company-auctex company-anaconda column-enforce-mode code-library clean-aindent-mode centered-cursor-mode cdlatex browse-at-remote avy-zap autoimports auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk all-the-icons-dired aggressive-indent aggressive-fill-paragraph ace-pinyin ace-link academic-phrases ac-ispell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
