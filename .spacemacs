@@ -50,9 +50,9 @@ This function should only modify configuration layer settings."
      git
      ibuffer
      imenu-list
+     ipython-notebook
      latex
      markdown
-     ;; nlinum
      org
      pdf
      (python :variables python-enable-yapf-format-on-save t)
@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
      et-nl
      et-org
      et-python
-     (et2010 :variables et2010-prettify-org-src-block t)
+     (et2010 :variables et2010-prettify-org-src-block nil)
      )
 
    ;; List of additional packages that will be installed without being
@@ -89,7 +89,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(orgit)
+   dotspacemacs-excluded-packages '(ein)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -112,7 +112,7 @@ It should only modify the values of Spacemacs settings."
    ;; to compile Emacs 27 from source following the instructions in file
    ;; EXPERIMENTAL.org at to root of the git repository.
    ;; (default nil)
-   dotspacemacs-enable-emacs-pdumper nil
+   dotspacemacs-enable-emacs-pdumper t
 
    ;; File path pointing to emacs 27.1 executable compiled with support
    ;; for the portable dumper (this is currently the branch pdumper).
@@ -171,11 +171,8 @@ It should only modify the values of Spacemacs settings."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style '(hybrid :variables
-                                       hybrid-style-enable-hjkl-bindings t
-                                       hybrid-style-visual-feedback t
-                                       ;; hybrid-mode-use-evil-search-module t
-                                       )
+   dotspacemacs-editing-style '(vim :variables
+                                    vim-style-visual-feedback t)
 
    ;; If non-nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
@@ -201,7 +198,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-startup-buffer-responsive t
 
    ;; Default major mode of the scratch buffer (default `text-mode')
-   dotspacemacs-scratch-mode 'emacs-lisp-mode
+   dotspacemacs-scratch-mode 'lisp-interaction-mode
 
    ;; Initial message in the scratch buffer, such as "Welcome to Spacemacs!"
    ;; (default nil)
@@ -482,6 +479,45 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
+  ;; Enable all-the-icons in dired mode
+  (add-hook 'dired-mode-hook #'all-the-icons-dired-mode )
+  (spacemacs|diminish all-the-icons-dired-mode)
+
+  ;; Enable aggressive indent for emacs-lisp mode
+  (add-hook 'emacs-lisp-mode-hook #'spacemacs/toggle-aggressive-indent-on)
+
+  ;; https://github.com/politza/pdf-tools/issues/247
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+
+  (defun spacemacs//python-setup-anaconda-company ()
+    "Setup anaconda auto-completion."
+    (spacemacs|add-company-backends
+      :backends (company-anaconda company-files company-yasnippet)
+      :modes python-mode
+      :append-hooks nil
+      :call-hooks t)
+    (company-mode))
+
+  (defun spacemacs|load-modes (modes)
+    (dolist (mode modes)
+      (with-temp-buffer
+        (funcall
+         (intern (concat (symbol-name mode) "-mode"))))))
+
+  (spacemacs|load-modes '(org
+                          emacs-lisp
+                          python
+                          markdown
+                          dired
+                          ))
+
+  (pyvenv-workon "sci")
+
+  (tooltip-mode 1)
+
+  (stardict-mode 1)
+
+  (transient-mark-mode 1)
   )
 
 (defun dotspacemacs/user-config ()
@@ -490,10 +526,30 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (tooltip-mode 1)
+
+  ;; Setup hybrid mode here due to known issue
+  (setq hybrid-style-enable-hjkl-bindings t)
+  (setq hybrid-style-visual-feedback t)
+  (setq hybrid-style-use-evil-search-module t)
+  (spacemacs/toggle-hybrid-mode-on)
+
+  (edit-server-start)
+
+  ;; https://emacs-china.org/t/topic/5728/7?u=et2010
+  (semantic-mode 1)
+  (semantic-default-elisp-setup)
+  ;; enable /semantic/ with minimal features for /stickyfunc/ and /*-semantic-or-imenu/
+  ;; stop semantic parsing (huge,slow) elisp sys libraries
+  (setq-mode-local emacs-lisp-mode
+                   semanticdb-find-default-throttle
+                   (default-value 'semanticdb-find-default-throttle))
+
+  ;; ;; 设置字体
+  ;; (spacemacs|do-after-display-system-init
+  ;;  ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
+  ;;  (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
 
   ;; 将希腊字母宽度设为一个字符
-  ;; https://emacs-china.org/t/topic/6059/18
   (defun blaenk/set-char-widths (alist)
     (while (char-table-parent char-width-table)
       (setq char-width-table (char-table-parent char-width-table)))
@@ -509,64 +565,6 @@ before packages are loaded."
 
   (blaenk/set-char-widths
    `((1 . (,(string-to-char "α")))))
-
-  ;; https://emacs-china.org/t/topic/5728/7?u=et2010
-  (semantic-mode 1)
-  (semantic-default-elisp-setup)
-  ;; enable /semantic/ with minimal features for /stickyfunc/ and /*-semantic-or-imenu/
-  ;; stop semantic parsing (huge,slow) elisp sys libraries
-  (setq-mode-local emacs-lisp-mode
-                   semanticdb-find-default-throttle
-                   (default-value 'semanticdb-find-default-throttle))
-
-  ;; Enable all-the-icons in dired mode
-  (add-hook 'dired-mode-hook #'all-the-icons-dired-mode )
-  (spacemacs|diminish all-the-icons-dired-mode)
-
-  ;; Enable aggressive indent for emacs-lisp mode
-  (add-hook 'emacs-lisp-mode-hook #'spacemacs/toggle-aggressive-indent-on)
-
-  ;; https://github.com/politza/pdf-tools/issues/247
-  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-
-  ;; 当使用 doom 主题时启用
-  ;; (doom-themes-org-config)
-
-  ;; 设置字体
-  ;; (spacemacs|do-after-display-system-init
-  ;;  ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
-  ;;  (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
-
-  ;; see http://emacs.stackexchange.com/a/3696 and https://github.com/magit/magit/issues/703
-  (setq find-file-visit-truename t
-        vc-follow-symlinks t)
-
-  ;; Uncomment this line when using Emacs 25.3, see https://github.com/syl20bnr/spacemacs/pull/10701
-  ;; (define-key read-expression-map (kbd "C-r") 'counsel-minibuffer-history)
-
-  ;; https://github.com/syl20bnr/spacemacs/issues/10366
-  (defun spacemacs//python-setup-anaconda-company ()
-    "Setup anaconda auto-completion."
-    (spacemacs|add-company-backends
-      :backends (company-anaconda company-files company-yasnippet)
-      :modes python-mode
-      :append-hooks nil
-      :call-hooks t)
-    (company-mode))
-
-  (defun spacemacs//python-setup-shell (&rest args)
-    ;; `spacemacs/pyenv-executable-find' always return nil even ipython was installed
-    (if t ;(spacemacs/pyenv-executable-find "ipython")
-        (progn (setq python-shell-interpreter "ipython")
-               (if (version< (replace-regexp-in-string "[\r\n|\n]$" "" (shell-command-to-string "ipython --version")) "5")
-                   ;; following line is different from original spacemacs
-                   (setq python-shell-interpreter-args "-i --pylab=qt --gui=qt")
-                 (setq python-shell-interpreter-args "--simple-prompt -i")))
-      (progn
-        (setq python-shell-interpreter-args "-i")
-        (setq python-shell-interpreter "python"))))
-  (spacemacs//python-setup-shell)
-
 
   ;; default python virtualenv
   (pyvenv-workon "scienv")
