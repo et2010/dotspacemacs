@@ -463,6 +463,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  ;; https://github.com/syl20bnr/spacemacs/issues/8740
   (setq winum-scope 'frame-local)
 
   ;; https://github.com/proofit404/anaconda-mode/issues/265
@@ -471,9 +472,9 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
-This function is called while dumping Spacemacs configuration. You can
-`require' or `load' the libraries of your choice that will be included
-in the dump."
+This function is called only while dumping Spacemacs configuration. You can
+`require' or `load' the libraries of your choice that will be included in the
+dump."
   ;; Enable all-the-icons in dired mode
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode )
   (spacemacs|diminish all-the-icons-dired-mode)
