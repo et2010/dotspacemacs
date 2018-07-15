@@ -114,7 +114,7 @@ It should only modify the values of Spacemacs settings."
    ;; to compile Emacs 27 from source following the instructions in file
    ;; EXPERIMENTAL.org at to root of the git repository.
    ;; (default nil)
-   dotspacemacs-enable-emacs-pdumper t
+   dotspacemacs-enable-emacs-pdumper nil
 
    ;; File path pointing to emacs 27.1 executable compiled with support
    ;; for the portable dumper (this is currently the branch pdumper).
@@ -485,6 +485,19 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
+  )
+
+(defun dotspacemacs/user-config ()
+  "Configuration for user code:
+This function is called at the very end of Spacemacs startup, after layer
+configuration.
+Put your configuration code here, except for variables that should be set
+before packages are loaded."
+
+  (tooltip-mode 1)
+
+  (stardict-mode 1)
+
   ;; Enable all-the-icons in dired mode
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode )
   (spacemacs|diminish all-the-icons-dired-mode)
@@ -504,43 +517,6 @@ dump."
       :call-hooks t)
     (company-mode))
 
-  (defun spacemacs|load-modes (modes)
-    (dolist (mode modes)
-      (with-temp-buffer
-        (funcall
-         (intern (concat (symbol-name mode) "-mode"))))))
-
-  (spacemacs|load-modes '(org
-                          emacs-lisp
-                          python
-                          markdown
-                          dired
-                          ))
-
-  (pyvenv-workon "sci")
-
-  (tooltip-mode 1)
-
-  (stardict-mode 1)
-
-  (transient-mark-mode 1)
-  )
-
-(defun dotspacemacs/user-config ()
-  "Configuration for user code:
-This function is called at the very end of Spacemacs startup, after layer
-configuration.
-Put your configuration code here, except for variables that should be set
-before packages are loaded."
-
-  ;; Setup hybrid mode here due to known issue
-  (setq hybrid-style-enable-hjkl-bindings t)
-  (setq hybrid-style-visual-feedback t)
-  (setq hybrid-style-use-evil-search-module t)
-  (spacemacs/toggle-hybrid-mode-on)
-
-  (edit-server-start)
-
   ;; https://emacs-china.org/t/topic/5728/7?u=et2010
   (semantic-mode 1)
   (semantic-default-elisp-setup)
@@ -549,11 +525,6 @@ before packages are loaded."
   (setq-mode-local emacs-lisp-mode
                    semanticdb-find-default-throttle
                    (default-value 'semanticdb-find-default-throttle))
-
-  ;; ;; 设置字体
-  ;; (spacemacs|do-after-display-system-init
-  ;;  ;; (spacemacs//set-monospaced-font "Source Code Pro" "方正螢雪" 15 18)
-  ;;  (et/set-monospaced-font "Source Code Pro" "Microsoft YaHei" 12 14))
 
   ;; 将希腊字母宽度设为一个字符
   (defun blaenk/set-char-widths (alist)
