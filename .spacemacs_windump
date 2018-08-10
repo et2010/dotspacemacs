@@ -460,6 +460,13 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq configuration-layer-elpa-archives
+        '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+          ("org-cn"   . "http://elpa.emacs-china.org/org/")
+          ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+
+  (setq inhibit-compacting-font-caches t)
+
   ;; https://github.com/syl20bnr/spacemacs/issues/8740
   (setq winum-scope 'frame-local)
 
@@ -502,6 +509,7 @@ dump."
                           python
                           markdown
                           dired
+                          latex
                           ))
 
   (pyvenv-workon "sci")
@@ -520,6 +528,9 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  ;; Show org timer in model-line
+  (setq spaceline-org-clock-p t)
+
   ;; Setup hybrid mode here due to known issue
   (setq hybrid-style-enable-hjkl-bindings t)
   (setq hybrid-style-visual-feedback t)
@@ -536,6 +547,16 @@ before packages are loaded."
   (setq-mode-local emacs-lisp-mode
                    semanticdb-find-default-throttle
                    (default-value 'semanticdb-find-default-throttle))
+
+  (defun et/semantic-remove-hooks ()
+    (remove-hook 'completion-at-point-functions
+                 'semantic-analyze-completion-at-point-function)
+    (remove-hook 'completion-at-point-functions
+                 'semantic-analyze-notc-completion-at-point-function)
+    (remove-hook 'completion-at-point-functions
+                 'semantic-analyze-nolongprefix-completion-at-point-function))
+
+  (add-hook 'semantic-mode-hook #'et/semantic-remove-hooks)
 
   ;; ;; 设置字体
   ;; (spacemacs|do-after-display-system-init
