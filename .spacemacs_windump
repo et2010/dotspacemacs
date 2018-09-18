@@ -466,6 +466,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
           ("org-cn"   . "http://elpa.emacs-china.org/org/")
           ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
 
+  ;; (setq powerline-image-apple-rgb nil)
+
   (setq inhibit-compacting-font-caches t)
 
   ;; https://github.com/syl20bnr/spacemacs/issues/8740
@@ -480,6 +482,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
+
   ;; Enable all-the-icons in dired mode
   (add-hook 'dired-mode-hook #'all-the-icons-dired-mode )
   (spacemacs|diminish all-the-icons-dired-mode)
@@ -528,6 +531,12 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  ;; (require 'awesome-tab)
+
+  (setq pfc-help-file-path "C:/Program Files/Itasca/PFC500/pfchelp.chm")
+
+  ;; (set-face-attribute 'doom-modeline-bar nil :background "#51afef")
 
   ;; Show org timer in model-line
   (setq spaceline-org-clock-p t)
