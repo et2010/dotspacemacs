@@ -74,6 +74,7 @@ This function should only modify configuration layer settings."
      et-goodies
      et-nl
      et-org
+     et-pfc
      et-python
      (et2010 :variables et2010-prettify-org-src-block nil)
      )
