@@ -59,12 +59,13 @@ This function should only modify configuration layer settings."
      markdown
      org
      pdf
-     (python :variables python-enable-yapf-format-on-save t)
+     python
      ranger
      semantic
      (shell :variables shell-default-shell 'eshell shell-default-height 30 shell-default-position 'bottom)
      shell-scripts
      (spell-checking :variables spell-checking-enable-by-default nil ispell-program-name "aspell")
+     (sql :variables sql-capitalize-keywords t)
      syntax-checking
      templates
      (treemacs :variables treemacs-use-filewatch-mode t treemacs-use-follow-mode t)
